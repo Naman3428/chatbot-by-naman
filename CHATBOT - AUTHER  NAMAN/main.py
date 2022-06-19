@@ -1,9 +1,10 @@
 # CODE IS ORIGINALLY WRITTEN BY MR. NAMAN SHARMA
+from ast import NameConstant
 import random
 import time
 import webbrowser
 import wikipedia
-import playsound
+#import playsound
 import datetime
 import pywhatkit as pw
 import pyttsx3
@@ -47,6 +48,7 @@ def ask():
     queryy = queryy.replace('.', '')
     queryy = queryy.replace('!', '')
     queryy = queryy.replace('|', '')
+    queryy = queryy.replace("'", "")
     queryy = queryy.lower()
 
     return queryy
@@ -88,12 +90,16 @@ while True:
     query = ask()
 
     try:
+
         if 'date' in query:
             dateis = datetime.datetime.now().date()
             write(f"The date is {dateis}")
 
-        elif 'whats your age' in query or 'how old are you' in query:
+        elif 'whats your age' in query or 'how old are you' in query or 'how old you are' in query:
             write("My age is about 40 days! lol")
+
+        elif "who am i" in query or "do you know me" in query:
+            write(f'You are {naam}')
 
         elif 'are you boy or girl' in query or 'whats your gender' in query or 'what is your gender' in query or 'are you male or female' in query:
             write("As my name says I am a girl!")
@@ -135,7 +141,7 @@ while True:
 
 
         elif "how is your day" in query or 'wassup' in query or 'whatsup' in query:
-            write(random.choice("It's Good😊", "Ahh... Neither good neither bad", "Same as you😁"))
+            write(random.choice(["It's Good😊", "Ahh... Neither good neither bad", "Same as you😁"]))
 
         elif "sing a song" in query:
             write("For Sure! I am now singing🤪")
@@ -147,9 +153,6 @@ while True:
         elif 'time' in query:
             timeis = datetime.datetime.now().strftime("%H:%M")
             write(f"The time is {timeis}")
-
-        elif 'hi' in query or 'hello' in query or 'hey' in query:
-            write('Hello!!')
 
         elif 'thanks' in query:
             write("Your Welcome!")
@@ -168,10 +171,9 @@ while True:
             if 'fine' or 'great' or 'good' or 'happy' in query:
                 write(random.choice(['Oh! Great!', "That's great", "Noice!"]))
 
-
             else:
                 sed = ['You can listen to songs', 'You can play outside', 'You can watch your favorite movie!']
-                write(random.choice(sed))
+                write(random.choice("sed"))
                 ask()
                 write('cool!')
 
@@ -344,7 +346,7 @@ while True:
             ans = wikipedia.summary(ques, sentences=2)
             write(ans)
 
-        elif 'who is' in query or 'what is' in query:
+        elif 'who is' in query or 'what is' in query or 'how' in query or 'when' in query or 'why' in query or 'what' in query or 'who' in query:
             try:
                 write("Searching Wikipedia... Please wait...")
                 query = query.replace("wikipedia", "")
@@ -360,6 +362,9 @@ while True:
             except:
                 write("I can't search it on wikipedia opening your query in browser...")
                 webbrowser.open(query)
+
+        elif 'google' in query or 'should' in query or 'search' in query:
+            webbrowser.open(query)
 
 
 
@@ -403,6 +408,9 @@ while True:
             songname = ask()
             write(f'Playing {songname} on youtube')
             pw.playonyt(songname)
+        
+        elif 'hi' in query or 'hello' in query or 'hey' in query or "namaste" in query or "hola" in query:
+            write(random.choice([f"Hey🤙 {naam}", f"Hello👋 {naam}", f"Hi👋 {naam}", f"Namaste {naam}🙏", f"hola {naam}"]))
 
         elif 'text to handwriting' in query or 'do my homework' in query or 'do my assignment' in query:
             write("What will be the text or content in your homework.. You can copy from anywhere and paste it here!")
@@ -437,15 +445,18 @@ while True:
                 write('got an error rip')
 
 
-
+       
+        
 
         else:
             write('If I was in the place of you, I had searched this to google or wikipedia')
             write(f'Query: {query}')
+            #not working have to fix it
+
 
 
     except Exception as exp:
         print(exp)
 
         write('I got an error')
-        playsound.playsound('erro.mp3')
+        #playsound.playsound('erro.mp3')
